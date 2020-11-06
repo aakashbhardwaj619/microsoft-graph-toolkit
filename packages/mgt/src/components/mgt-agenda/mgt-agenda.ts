@@ -577,7 +577,9 @@ export class MgtAgenda extends MgtTemplatedComponent {
   }
 
   private prettyPrintTimeFromDateTime(date: Date) {
-    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    if (!this.preferredTimezone) {
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    }
     let hours = date.getHours();
     const minutes = date.getMinutes();
     const ampm = hours >= 12 ? 'PM' : 'AM';
